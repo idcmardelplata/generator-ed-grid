@@ -7,7 +7,6 @@ var cssnano      = require('cssnano');
 var browserSync  = require('browser-sync');
 var sourcemaps   = require('gulp-sourcemaps');
 var browserify   = require('browserify');
-var babelify     = require('babelify');
 var buffer       = require('vinyl-buffer');
 var source       = require('vinyl-source-stream');
 
@@ -44,20 +43,6 @@ gulp.task('compileCore', function() {
     .pipe(gulp.dest('./css'))
 });
 
-//gulp.task('scripts', function() {
-  //browserify('./js/babel/index.js', {
-      //debug: true,
-      //standalone: 'edgrid'
-    //})
-    //.transform(babelify)
-    //.bundle()
-    //.pipe(source('ed-grid.js'))
-    //.pipe(buffer())
-    //.pipe(sourcemaps.init({ loadMaps: true }))
-    //.pipe(sourcemaps.write('.'))
-    //.pipe(gulp.dest('./js'))
-//});
-
 gulp.task('sw', function() {
   gulp.watch('./scss/**.scss', ['styles']);
 });
@@ -72,7 +57,6 @@ gulp.task('default', function() {
   })
 
   gulp.watch('./scss/**.scss', ['styles']);
-  //gulp.watch('./js/*.js', ['scripts']);
   gulp.watch('./*.html').on('change', server.reload);
   gulp.watch('./js/*.js').on('change', server.reload);
 });
