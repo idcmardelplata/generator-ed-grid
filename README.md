@@ -3,7 +3,7 @@
 
 ## Installation
 
-Primero, instale [Yeoman](http://yeoman.io) y generator-ed-grid utilizando [npm](https://www.npmjs.com/) (Se asume que usted ya tiene preinstalado [node.js](https://nodejs.org/)).
+Primero, instale [Yeoman](http://yeoman.io) y el  generator-ed-grid utilizando [npm](https://www.npmjs.com/) (Se asume que usted ya tiene preinstalado [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo

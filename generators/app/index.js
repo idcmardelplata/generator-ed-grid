@@ -14,9 +14,9 @@ module.exports = yeoman.Base.extend({
       type: 'list',
       name: 'features',
       message: 'Seleccione la version de ed-grid a utilizar',
-      //choices : ['version en css','version en sass']
       choices: [
-      {name: 'Version en sass (recomendada)', value:'includeSass', default: true},
+      {name: 'Version en sass con soporte para babel (recomendada)', value:'includeSass', default: true},
+      {name: 'Version sass', value:'includeWithoutBabel', default: false},
       {name: 'Version en css', value:'includeCss', default: false}
       ]
     }];
@@ -28,6 +28,14 @@ module.exports = yeoman.Base.extend({
 
       this.includeSass = this.hasFeature('includeSass');
       this.includeCss  = this.hasFeature('includeCss');
+      this.includeWithoutBabel = this.hasFeature('includeWithoutBabel');
+
+      this.copyFile = function(file) {
+        this.fs.copy( this.templatePath(file), this.destinationPath(file));
+      }
+      this.copyDir = function(dir) {
+        this.directory( this.templatePath(dir), this.destinationPath(dir));
+      }
 
       done();
     }.bind(this));
@@ -35,28 +43,41 @@ module.exports = yeoman.Base.extend({
 
   writing: function () {
 
-    if (this.hasFeature('includeCss')) {
-      this.directory( this.templatePath('css'), this.destinationPath('css'));
-      this.fs.copy( this.templatePath('css/ed-grid.css'), this.destinationPath('css/ed-grid.css'));
-      this.fs.copy( this.templatePath('css/ed-grid.min.css'), this.destinationPath('css/ed-grid.min.css'));
+    if (this.includeCss) {
+      this.copyDir('css');
+      this.copyFile('css/ed-grid.css');
+      this.copyFile('css/ed-grid.min.css');
     }
-    else {
-      this.fs.copy( this.templatePath('package.json'), this.destinationPath('package.json'));
-      this.fs.copy( this.templatePath('index.html'), this.destinationPath('index.html'));
-      this.fs.copy( this.templatePath('gulpfile.babel.js'), this.destinationPath('gulpfile.babel.js'));
+    else if(this.includeWithoutBabel) {
+      this.copyFile('gulpfile.js');
+      this.copyFile('index.html');
+      this.copyFile('README.md');
+      this.copyDir('scss');
+      this.copyDir('js');
+      this.fs.copyTpl(
+          this.templatePath('package.json'), 
+          this.destinationPath('package.json'),{
+            includeBabel : false
+          });
+    }
+    else if(this.includeSass) {
+      this.fs.copyTpl(
+          this.templatePath('package.json'), 
+          this.destinationPath('package.json'),{
+            includeBabel : true
+          });
 
-      this.fs.copy( this.templatePath(".babelrc"), this.destinationPath(".babelrc"));
-      this.fs.copy( this.templatePath(".editorconfig"), this.destinationPath(".editorconfig"));
-      this.fs.copy( this.templatePath("README.md"), this.destinationPath("README.md"));
-
-      //this.directory( this.templatePath('css'), this.destinationPath('css'));
-
-      this.directory( this.templatePath('scss'), this.destinationPath('scss'));
-      this.directory( this.templatePath('js'), this.destinationPath('js'));
+      this.copyFile('index.html');
+      this.copyFile('gulpfile.babel.js');
+      this.copyFile('.babelrc');
+      this.copyFile('.editorconfig');
+      this.copyFile('README.md');
+      this.copyDir('scss');
+      this.copyDir('js');
     }
   },
 
   install: function () {
-    if (this.hasFeature('includeSass')) this.npmInstall();
+    if (!this.includeCss) this.npmInstall();
   }
 });

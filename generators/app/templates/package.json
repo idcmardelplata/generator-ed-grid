@@ -27,12 +27,14 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^6.4.1",
+    <% if(includeBabel) { %>
     "babel-cli": "^6.16.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
     "babel-register": "^6.18.0",
     "babelify": "^7.3.0",
+    <%}%>
     "browser-sync": "^2.16.0",
     "browserify": "^13.1.1",
     "cssnano": "^3.7.5",
