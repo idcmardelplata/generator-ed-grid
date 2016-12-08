@@ -16,6 +16,39 @@ Entonces genere su nuevo proyecto
 yo ed-grid
 ```
 
+
+Puede buscar el generador de esta manera:
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-1.png) 
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-2.png) 
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-3.png) 
+
+
+
+***
+
+
+Una vez instalado ejecute yeoman y le aparecera en la lista de generadores.
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-4.png) 
+
+
+Para terminar simplemente seleccione la opcion que crea mas conveniente y presione **Enter**
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-5.png) 
+
+
+El generador comenzara a crear toda la estructura de su proyecto y luego instalara las dependencias necesarias.
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-6.png) 
+
+
+Ya puede comenzar a trabajar en su nuevo y asombroso proyecto usando Ed-grid! 
+
+![search-generator](/home/martin/Fuentes/generator-ed-grid/img/paso-7.png) 
+
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
