@@ -23,7 +23,7 @@ let sassOptions = {
 };
 
 gulp.task('styles', () =>
-  gulp.src('./scss/styles.scss')
+  gulp.src('./test/styles.scss')
       .pipe(plumber({
         errorHandler: function (err) {
           console.log(err);
@@ -33,12 +33,12 @@ gulp.task('styles', () =>
       .pipe(sass(sassOptions))
       .pipe(postcss(postcssPlugins))
       .pipe(plumber.stop())
-      .pipe(gulp.dest('./css'))
+      .pipe(gulp.dest('./test'))
       .pipe(server.stream())
 );
 
 gulp.task('compileCore', () =>
-  gulp.src('./scss/ed-grid/ed-grid.scss')
+  gulp.src('./ed-grid.scss')
     .pipe(sass(sassOptions))
     .pipe(postcss(postcssPlugins))
     .pipe(gulp.dest('./css'))
@@ -59,20 +59,20 @@ gulp.task('scripts', () =>
 );
 
 gulp.task('sw', () =>
-  gulp.watch('./scss/**.scss', ['styles'])
+  gulp.watch('./**/**.scss', ['styles'])
 );
 
 gulp.task('default', () => {
   server.init({
     server: {
-      baseDir: '.'
+      baseDir: './test' //para pruebas con la carpeta test
     },
 
     serveStatic: ['./js']
   });
 
-  gulp.watch('./scss/**.scss', ['styles']);
+  gulp.watch('./**/**.scss', ['styles']);
   gulp.watch('./js/*.js', ['scripts']);
-  gulp.watch('./*.html').on('change', server.reload);
+  gulp.watch('./test/**.html').on('change', server.reload);
   gulp.watch('./js/*.js').on('change', server.reload);
 });
